@@ -9,29 +9,28 @@ class sql extends PDO {
 	}
 
 	// função para ligar parametros assim pode ser reutilizado varias vezes dentro do nosso código
-	private function setParams($statment, $parameters = array()){
-
-		foreach ($parameters as $key => $value) {
-			// $this ->  chamar a própria função
-			$this ->bindPram($key, $value);
-		}
-
-	}
+	private function setParams($statment,$parameters = array ()){
+    foreach ($parameters as $key => $value) {
+        $this->setParam($statment,$key,$value);
+    }
+}
 
 	// criar uma função para que este método também tenha acesso o método query
 	private function setParam($statment, $key, $value){
-		$statment->bindPram($key, $value);
+		$statment->bindParam($key, $value);
 	}
 	// executar os comandos no banco
-	public function query($rawQuery, $params=array()){
-		// $rawQuary -> quary bruta que vai ser tratado depois 
-		$stmt = $this->conn->prepare($rawQuery);
-		$this->setParams($stmt, $params);
-
-		$stmt->execute();
-
-		return $stmt;
-	}
+	public function query($rawQuery,$param = array()){
+ 
+    $stmt = $this->conn->prepare($rawQuery);
+ 
+    $this->setParams($stmt,$param);
+ 
+    $stmt->execute();
+ 
+    return $stmt;
+ 
+}
 
 	// criar a function select mas vamos chamar a função query porque ele já sabe fazer está tarefa
 	public function select($rawQuery, $params = array()):array // este método returna um array
