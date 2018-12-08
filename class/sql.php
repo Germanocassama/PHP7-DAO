@@ -8,10 +8,12 @@ class sql extends PDO {
 		$this->conn = new PDO("mysql:dbname=dbphp7; host=localhost", "root", "musquebalassana94");
 	}
 
-	// função para ligar parametros assim pode ser reutilizado varias vezes dentro do nosso código
-	private function setParams($statment,$parameters = array ()){
+	// função para ligar parametros e pode ser reutilizado varias vezes dentro do nosso código
+	private function setParams($statment, $parameters = array ()){
+
     foreach ($parameters as $key => $value) {
-        $this->setParam($statment,$key,$value);
+    	
+        $this->setParam($statment, $key, $value);
     }
 }
 
@@ -20,7 +22,8 @@ class sql extends PDO {
 		$statment->bindParam($key, $value);
 	}
 	// executar os comandos no banco
-	public function query($rawQuery,$param = array()){
+	public function query($rawQuery, 
+		$param = array()){
  
     $stmt = $this->conn->prepare($rawQuery);
  
