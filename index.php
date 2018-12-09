@@ -33,10 +33,18 @@ $aluno->insert();
 echo $aluno;
 */
 
-//tualizar dados 
+//Atualizar dados 
+/*
 $usuario = new usuario();
 $usuario->carregaPorId(8);
 $usuario->update("professor", "senhaProf");
+echo $usuario;
+*/
+
+// Apagar usuario
+$usuario = new usuario();
+$usuario->carregaPorId(7);
+$usuario->delete();
 echo $usuario;
 
 

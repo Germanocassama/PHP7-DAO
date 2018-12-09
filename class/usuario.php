@@ -123,6 +123,20 @@ class usuario{
 		));
 	}
 
+	// Apagar dados 
+	public function delete(){
+		$sql = new sql();
+
+		$sql->query("DELETE FROM usuarios WHERE id = :id", array(
+			'id'=>$this->getId()
+		));
+
+		 $this->setId(0);
+		$this->setEmail("");
+		$this->setSenha("");
+		$this->setDtcadastro(new DateTime());
+	}
+
 	// criar construtor magico para receber  email e a senha
 	//  se não passar nada ele retorna fazio
 	public function __construct($email = "", $senha = ""){
